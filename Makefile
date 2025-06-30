@@ -202,7 +202,7 @@ mac64: $(SQLITE_UNPACKED) jni-header
 	docker run $(DOCKER_RUN_OPTS) -v $$PWD:/workdir -e CROSS_TRIPLE=x86_64-apple-darwin multiarch/crossbuild make clean-native native OS_NAME=Mac OS_ARCH=x86_64
 
 mac-arm64: $(SQLITE_UNPACKED) jni-header
-	docker run $(DOCKER_RUN_OPTS) -v $$PWD:/workdir -e CROSS_TRIPLE=aarch64-apple-ios gotson/crossbuild make clean-native native OS_NAME=Mac OS_ARCH=aarch64"
+	docker run $(DOCKER_RUN_OPTS) -v $$PWD:/workdir -e CROSS_TRIPLE=aarch64-apple-ios gotson/crossbuild make clean-native native OS_NAME=Mac OS_ARCH=aarch64
 
 # deprecated
 mac32: $(SQLITE_UNPACKED) jni-header
