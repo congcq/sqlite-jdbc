@@ -133,7 +133,7 @@ $(NATIVE_DLL): $(SQLITE_OUT)/$(LIBNAME)
 	cp $< $(NATIVE_TARGET_DIR)/$(LIBNAME)
 
 ios-arm64: $(SQLITE_UNPACKED) jni-header
-  docker run $(DOCKER_RUN_OPTS) -v $$PWD:/workdir -e IOS_ARCH=arm64 ghcr.io/trxcllnt/crossbuild-ios:latest make clean-native native OS_NAME=iOS OS_ARCH=arm64
+	docker run $(DOCKER_RUN_OPTS) -v $$PWD:/workdir -e IOS_ARCH=arm64 ghcr.io/trxcllnt/crossbuild-ios:latest make clean-native native OS_NAME=iOS OS_ARCH=arm64
 
 win32: $(SQLITE_UNPACKED) jni-header
 	./docker/dockcross-windows-x86 -a $(DOCKER_RUN_OPTS) bash -c 'make clean-native native CROSS_PREFIX=i686-w64-mingw32.static- OS_NAME=Windows OS_ARCH=x86'
