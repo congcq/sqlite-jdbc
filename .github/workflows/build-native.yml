@@ -78,7 +78,7 @@ jobs:
     name: ios native libraries
     runs-on: macos-latest
     steps:
-      - uses: actions/checout@main
+      - uses: actions/checkout@main
       - name: build for ios
         run: make ios-arm64
 
