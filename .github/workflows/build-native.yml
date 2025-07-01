@@ -77,15 +77,15 @@ jobs:
   ios-build:
     name: ios native libraries
     runs-on: macos-latest
-    needs: [check, matrix]
-    strategy:
-      matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
+    #needs: [check, matrix]
+    #strategy:
+      #matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
     steps:
       - uses: actions/checkout@main
       - name: build for ios
-        run: make ios-arm64
-        env:
-          OCI_EXE: docker
+        run: |
+          make native OS_NAME=iOS OS_ARCH=arm64 \
+          CC="clang -arch arm64 -miphoneos-version-min=12.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path)"
 
   build:
     name: Build native libraries
