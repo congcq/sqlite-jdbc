@@ -2,6 +2,7 @@ name: Build Native
 
 on:
   workflow_dispatch:
+  push:
   pull_request:
     types: [ opened ]
   issue_comment:
@@ -77,16 +78,15 @@ jobs:
   ios-build:
     name: ios native libraries
     runs-on: macos-latest
-    #needs: [check, matrix]
-    #strategy:
-      #matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
+    needs: [check, matrix]
+    strategy:
+      matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
     steps:
       - uses: actions/checkout@main
       - name: build for ios
-        run: |
-          make native OS_NAME=iOS OS_ARCH=arm64 \
-          CC="clang -arch arm64 -miphoneos-version-min=12.0 -isysroot $(xcrun --sdk iphoneos --show-sdk-path)" \
-          perl -i -pe 'print "SQLITE_PRIVATE int RegisterExtensionFunctions(sqlite3*);\n" if $. == 100' target/sqlite-3.50.2-iOS-arm64/sqlite3.c
+        run: make ios-arm64
+        env:
+          OCI_EXE: docker
 
   build:
     name: Build native libraries
